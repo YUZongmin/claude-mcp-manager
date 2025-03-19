@@ -1,0 +1,20 @@
+# Local profiles directory
+profiles/
+memory/
+
+# Environment variables
+.env
+
+# macOS system files
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp 
