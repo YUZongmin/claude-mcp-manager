@@ -8,6 +8,18 @@ else
     return 1
 fi
 
+# Function to restart Claude app
+restart_claude() {
+    echo "Restarting Claude..."
+    # Close Claude if it's running
+    osascript -e 'tell application "Claude" to quit'
+    # Wait a moment for the app to close properly
+    sleep 2
+    # Open Claude
+    open -a "Claude"
+    echo "Claude has been restarted!"
+}
+
 # Claude MCP profile management function
 mcp() {
   local claude_config="${CLAUDE_CONFIG}"
@@ -39,6 +51,7 @@ mcp() {
   if [[ "$1" == "off" ]]; then
     echo "$empty_config" > "$claude_config"
     echo "Claude MCP configuration disabled."
+    restart_claude
   
   elif [[ "$1" == "status" ]]; then
     if [[ -f "$claude_config" ]]; then
@@ -90,11 +103,12 @@ mcp() {
   elif [[ -f "$profiles_dir/$1.json" ]]; then
     cp "$profiles_dir/$1.json" "$claude_config"
     echo "Claude MCP configuration set to '$1' profile."
+    restart_claude
   
   else
     echo "Usage: mcp [command|profile]"
     echo "Commands:"
-    echo "  off        - Disable MCP"
+    echo "  off        - Disable MCP and restart Claude"
     echo "  status     - Show current MCP status"
     echo "  ls         - List available profiles"
     echo "  save NAME  - Save current configuration as a new profile"
