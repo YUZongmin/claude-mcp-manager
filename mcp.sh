@@ -25,7 +25,6 @@ mcp() {
   local claude_config="${CLAUDE_CONFIG}"
   local profiles_dir="${PROFILES_DIR}"
   local empty_config='{
-  "globalShortcut": "Control+Option+Space",
   "mcpServers": {
   }
 }'
